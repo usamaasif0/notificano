@@ -1,4 +1,4 @@
-# Notificano
+# Notificano 
 
 **Notificano** is a modern, open source, developer-friendly real-time notification system for Laravel. Built to leverage Laravel Reverb, Notificano is among the first (and most complete) open source packages to offer plug-and-play real-time notifications for Laravel applications. It provides a seamless, flexible, and robust solution for adding notification bells, unread counts, and notification lists to your app—without the hassle of building everything from scratch.
 

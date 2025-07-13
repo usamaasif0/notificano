@@ -5,7 +5,7 @@
 - **First-class real-time notifications:** Instantly notify users of new events, messages, or updates using Laravel Reverb.
 - **Easy integration:** Add a notification bell and list to your layout with a single Blade directive.
 - **Flexible and customizable:** Publish and override views, config, and assets as needed.
-- **Production-ready:** Built for Laravel 10/11+, with best practices and extensibility in mind.
+- **Production-ready:** Built for Laravel 11 and above, with best practices and extensibility in mind.
 - **Open source & community-driven:** Licensed under MIT, Notificano welcomes issues, suggestions, and contributions from the Laravel community.
 
 > **Notificano is one of the first comprehensive, open source real-time notification packages for Laravel using Reverb.**

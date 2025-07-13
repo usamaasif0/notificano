@@ -37,7 +37,7 @@ Add to your `composer.json`:
 Then run:
 
 ```
-composer require usamaasif0/notificano:dev-main
+composer require usamaasif0/notificano
 ```
 
 ### 2. Publish Migrations, Config, and Assets

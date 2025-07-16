@@ -64,8 +64,14 @@ class NotificanoServiceProvider extends ServiceProvider
             return "<?php echo view('notificano::notifications.partials.bell-notification')->render(); ?>";
         });
 
+        // Load helpers
+        if (file_exists(__DIR__ . '/Helpers/helpers.php')) {
+            require_once __DIR__ . '/Helpers/helpers.php';
+        }
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'notificano');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/channels.php');
 
         $timestamp1 = date('Y_m_d_His');
         $timestamp2 = date('Y_m_d_His', time() + 1);
@@ -74,6 +80,7 @@ class NotificanoServiceProvider extends ServiceProvider
             __DIR__ . '/../database/migrations/add_avatar_to_users_table.stub' => database_path('migrations/' . $timestamp2 . '_add_avatar_to_users_table.php'),
             __DIR__ . '/../resources/images/no_avatar.webp' => public_path('images/no_avatar.webp'),
             __DIR__ . '/../config/notificano.php' => config_path('notificano.php'),
-        ], 'notificano-migrations');
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/notificano'),
+        ], 'notificano-all');
     }
 }

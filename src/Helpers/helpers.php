@@ -28,6 +28,7 @@ if (!function_exists('setNotification')) {
             ]);
 
             $data['id'] = $notification->id;
+            $data['to_user'] = $notification->to_user;
 
             $unreadCount = Notification::where('to_user', $to_user)
                 ->whereNull('read_at')

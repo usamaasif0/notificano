@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="card-body p-0 notifications-list" id="notificationsContainer">
-                    @include('notifications.partials.list')
+                    @include('notificano::notifications.partials.list')
                 </div>
             </div>
         </div>

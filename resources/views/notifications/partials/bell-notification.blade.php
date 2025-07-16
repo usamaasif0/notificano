@@ -1,7 +1,9 @@
-<li class="nav-item dropdown">
+<li class="nav-item dropdown d-flex">
     <a class="nav-link position-relative" href="#" id="notificationsDropdown" role="button"
         data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-        <i class="fa fa-bell"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="currentColor">
+            <path d="M224 512c35.3 0 63.1-28.7 63.1-64H160.9c0 35.3 28.7 64 63.1 64zM439.4 362.3c-19.8-20.7-55.4-52.3-55.4-154.3 0-77.7-54.5-139.4-127.1-155.2V32c0-17.7-14.3-32-32-32s-32 14.3-32 32v20.8C118.5 68.6 64 130.3 64 208c0 102-35.6 133.6-55.4 154.3-6 6.3-8.6 14.4-8.6 22.7 0 17.3 13.9 32 32 32H416c18.1 0 32-14.7 32-32 0-8.3-2.6-16.4-8.6-22.7z"/>
+        </svg>
         <span class="notification-count badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle d-{{ empty($initialUnreadCount) ? 'none' : '' }}">{{ $initialUnreadCount }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end pb-0" aria-labelledby="notificationsDropdown"

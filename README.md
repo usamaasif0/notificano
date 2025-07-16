@@ -22,28 +22,37 @@
 
 ---
 
+## Prerequisites
+
+Before installing Notificano, make sure your Laravel app has:
+
+- **Laravel Reverb** installed and configured for real-time broadcasting.
+- Broadcasting set up and working.
+
+If you have not set up broadcasting and Reverb, run:
+
+```sh
+php artisan install:broadcasting
+```
+
+Follow the prompts to complete the setup. For more details, see the [Laravel Reverb documentation](https://laravel.com/docs/11.x/reverb).
+
+---
+
 ## Installation
 
-### 1. Require the Package (Local Path Example)
+### 1. Install the Package
 
-Add to your `composer.json`:
-
-```
-"repositories": [
-  { "type": "path", "url": "packages/notificano" }
-]
-```
-
-Then run:
+Run the command:
 
 ```
-composer require usamaasif0/notificano:dev-main
+composer require usamaasif0/notificano
 ```
 
-### 2. Publish Migrations, Config, and Assets
+### 2. Publish All Resources
 
 ```
-php artisan notificano:publish-migrations
+php artisan vendor:publish --tag=notificano-all
 ```
 
 ### 3. Run Migrations

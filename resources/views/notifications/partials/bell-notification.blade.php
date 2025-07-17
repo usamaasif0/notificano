@@ -1,3 +1,21 @@
+<style>
+    .notification-count {
+        display: inline-block;
+        top: 0.563rem !important;
+        position: absolute !important;
+        left: 1.375rem !important;
+    }
+    .unread-icon{
+        font-size: 0.5rem;
+    }
+    .read-notification, .read-notification:hover {
+        background: #dfedf9;
+    }
+    .notifications-list .dropdown-item:hover, .all-notification-link:hover{
+        background: #cad7e2
+    }
+</style>
+
 <li class="nav-item dropdown d-flex">
     <a class="nav-link position-relative" href="#" id="notificationsDropdown" role="button"
         data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -21,6 +39,11 @@
             <hr class="dropdown-divider mb-0">
         </li>
         <li>
+            @if(isset($tableAvailable) && !$tableAvailable)
+                <div class="alert alert-danger py-1 my-2 mx-3">
+                    Notifications Table Does Not Exist.
+                </div>
+            @endif
             <div class="notifications-list" style="max-height: 300px; overflow-y: auto; overflow-x: hidden; ">
                 <!-- Notifications will be loaded here -->
 
@@ -54,8 +77,6 @@
         </a>
     </ul>
 </li>
-
-
 
 @if(auth()->user())
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

@@ -20,6 +20,7 @@ class NotificationController extends Controller
                     'totalNotificationCount' => 0,
                     'unreadNotificationCount' => 0,
                     'readNotificationCount' => 0,
+                    'tableAvailable' => false,
                 ]);
             }
 
@@ -33,6 +34,8 @@ class NotificationController extends Controller
             $readNotificationCount = $totalNotificationCount - $unreadNotificationCount;
 
             $notifications = $user->notifications()->latest()->get();
+
+            $tableAvailable = true;
 
             if ($request->ajax()) {
                 $notificationsArray = $notifications->map(function ($notification) {
@@ -52,7 +55,7 @@ class NotificationController extends Controller
                 ]);
             }
 
-            return view('notificano::notifications.index', compact('notifications', 'totalNotificationCount', 'unreadNotificationCount', 'readNotificationCount'));
+            return view('notificano::notifications.index', compact('notifications', 'totalNotificationCount', 'unreadNotificationCount', 'readNotificationCount', 'tableAvailable'));
         } catch (\Throwable $e) {
             \Log::error('NotificationController@index error: ' . $e->getMessage());
             return view('notificano::notifications.index', [
@@ -60,6 +63,7 @@ class NotificationController extends Controller
                 'totalNotificationCount' => 0,
                 'unreadNotificationCount' => 0,
                 'readNotificationCount' => 0,
+                'tableAvailable' => false,
             ]);
         }
     }

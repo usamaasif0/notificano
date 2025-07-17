@@ -5,7 +5,7 @@
     
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if(!$table_available)
+            @if(!$tableAvailable)
             <div class="alert alert-danger py-2">
                 Notifications Table Does Not Exists.
             </div>

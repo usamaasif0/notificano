@@ -76,8 +76,6 @@ class NotificanoServiceProvider extends ServiceProvider
         $timestamp1 = date('Y_m_d_His');
         $timestamp2 = date('Y_m_d_His', time() + 1);
         $this->publishes([
-            __DIR__ . '/../database/migrations/create_notifications_table.stub' => database_path('migrations/' . $timestamp1 . '_create_notifications_table.php'),
-            __DIR__ . '/../database/migrations/add_avatar_to_users_table.stub' => database_path('migrations/' . $timestamp2 . '_add_avatar_to_users_table.php'),
             __DIR__ . '/../resources/images/no_avatar.webp' => public_path('images/no_avatar.webp'),
             __DIR__ . '/../config/notificano.php' => config_path('notificano.php'),
             __DIR__ . '/../resources/views' => resource_path('views/vendor/notificano'),

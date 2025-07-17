@@ -22,6 +22,19 @@
 
 ---
 
+## View Examples
+
+**Notification Bell Example:**
+
+<div align="center">
+  <img src=".github/images/bell_notification.png" alt="Notification Bell Example" />
+</div>
+
+
+**Notification List Page Example:**
+
+<img src=".github/images/notifications_page.png" alt="Notification List Page Example" />
+
 ## Prerequisites
 
 Before installing Notificano, make sure your Laravel app has:
@@ -39,6 +52,25 @@ Follow the prompts to complete the setup. For more details, see the [Laravel Rev
 
 ---
 
+## Running Reverb and Frontend Assets
+
+To enable real-time notifications, you must run the Reverb server:
+
+```sh
+php artisan reverb:start
+```
+
+If your project uses a frontend build system (like Vite or Laravel Mix), make sure to install dependencies and run the dev server:
+
+```sh
+npm install
+npm run dev
+```
+
+Keep both the Reverb server and your frontend dev server running during development for real-time updates.
+
+---
+
 ## Installation
 
 ### 1. Install the Package
@@ -50,15 +82,15 @@ composer require usamaasif0/notificano
 ```
 
 ### 2. Publish All Resources
-
+Run:
 ```
 php artisan vendor:publish --tag=notificano-all
 ```
 
-### 3. Run Migrations
-
+### 3. Publish and Run Migrations
+Run:
 ```
-php artisan migrate
+php artisan notificano:publish-migrations
 ```
 
 ---
@@ -93,6 +125,49 @@ return [
     'max_notifications' => 5,
 ];
 ```
+
+### 3. Sending Notifications Programmatically
+
+You can send a notification from anywhere in your app using the `setNotification` helper:
+
+- **First parameter:** An array of notification data (must include at least a 'title', can optionally include a 'url').
+- **Second parameter:** The user ID to send the notification to (optional, defaults to 1 if not provided).
+
+```php
+setNotification(
+    ['title' => 'string (required)', 'url' => 'route name (optional)'],
+    $toUserId // optional, defaults to user ID 1
+);
+```
+- `title`: The notification title (required)
+- `url`: The route name or URL (optional)
+- `toUserId`: The user ID to send the notification to (optional, defaults to 1)
+
+### 4. Use Case Example
+
+Here is an example of how you might use `setNotification` in a controller when a new post is created:
+
+```php
+use Illuminate\Http\Request;
+
+public function store(Request $request)
+{
+    // ... your logic to create a resource, e.g., a new post
+    $post = Post::create($request->all());
+
+    // Send a notification to user with ID 5
+    setNotification([
+        'title' => 'A new post was created!',
+        'url' => route('posts.show', $post->id) // optional
+    ], 5);
+
+    // ... rest of your controller logic
+}
+```
+
+**Explanation:**
+- The first parameter is an array with at least a `'title'` key. You can also include `'url'` or any other data your notification system uses.
+- The second parameter is the user ID you want to notify (in this example, user ID 5). If you omit it, the notification will be sent to user ID 1 by default.
 
 ---
 

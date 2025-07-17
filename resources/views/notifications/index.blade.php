@@ -45,78 +45,74 @@
 </div>
 
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function filterNotificationsByTab(filter) {
+        // Set active tab UI
+        $("#notificationTabs .nav-link").removeClass("active");
+        $(`#notificationTabs .nav-link[data-filter="${filter}"]`).addClass("active");
 
-@section('scripts')
-    @if(true)
-        <script>
-            function filterNotificationsByTab(filter) {
-                // Set active tab UI
-                $("#notificationTabs .nav-link").removeClass("active");
-                $(`#notificationTabs .nav-link[data-filter="${filter}"]`).addClass("active");
+        let notifications = $("#notificationsContainer .notification-item");
+        notifications.addClass("d-none");
 
-                let notifications = $("#notificationsContainer .notification-item");
-                notifications.addClass("d-none");
+        let visibleNotifications = 0;
 
-                let visibleNotifications = 0;
+        if (filter === "all") {
+            notifications.removeClass("d-none");
+            visibleNotifications = notifications.length;
+        } else {
+            let matched = notifications.filter(`[data-status="${filter}"]`);
+            matched.removeClass("d-none");
+            visibleNotifications = matched.length;
+        }
 
-                if (filter === "all") {
-                    notifications.removeClass("d-none");
-                    visibleNotifications = notifications.length;
-                } else {
-                    let matched = notifications.filter(`[data-status="${filter}"]`);
-                    matched.removeClass("d-none");
-                    visibleNotifications = matched.length;
-                }
+        // Message logic
+        const messageText = filter === "all"
+            ? "No Notification Available"
+            : `No ${filter.charAt(0).toUpperCase() + filter.slice(1)} Notification Available`;
 
-                // Message logic
-                const messageText = filter === "all"
-                    ? "No Notification Available"
-                    : `No ${filter.charAt(0).toUpperCase() + filter.slice(1)} Notification Available`;
-
-                let messageBox = $("#noNotificationMessage");
-                if (visibleNotifications === 0) {
-                    if (messageBox.length === 0) {
-                        $("#notificationsContainer").append(`
-                            <div id="noNotificationMessage" class="text-center text-danger fw-bold py-1">
-                                ${messageText}
-                            </div>
-                        `);
-                    } else {
-                        messageBox.text(messageText);
-                    }
-                } else {
-                    messageBox.remove();
-                }
+        let messageBox = $("#noNotificationMessage");
+        if (visibleNotifications === 0) {
+            if (messageBox.length === 0) {
+                $("#notificationsContainer").append(`
+                    <div id="noNotificationMessage" class="text-center text-danger fw-bold py-1">
+                        ${messageText}
+                    </div>
+                `);
+            } else {
+                messageBox.text(messageText);
             }
+        } else {
+            messageBox.remove();
+        }
+    }
 
-            $(document).on("click", "#notificationTabs .nav-link", function (e) {
-                e.preventDefault();
-                const filter = $(this).data("filter");
-                filterNotificationsByTab(filter);
-            });
+    $(document).on("click", "#notificationTabs .nav-link", function (e) {
+        e.preventDefault();
+        const filter = $(this).data("filter");
+        filterNotificationsByTab(filter);
+    });
 
 
-            $(document).on("click", "#markAllAsRead", function(){
-                // Send AJAX request to Laravel to mark as read
-                let url = "{{ route('notifications.mark-all-as-read') }}";
-                $.ajax({
-                    url: url,
-                    method: "POST",
-                    contentType: "application/json",
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"),
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            location.reload()
-                        }
-                    },
-                    error: function (error) {
-                        console.error("❌ Error:", error);
-                    },
-                });
-            })
+    $(document).on("click", "#markAllAsRead", function(){
+        // Send AJAX request to Laravel to mark as read
+        let url = "{{ route('notifications.mark-all-as-read') }}";
+        $.ajax({
+            url: url,
+            method: "POST",
+            contentType: "application/json",
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"),
+            },
+            success: function (data) {
+                if (data.success) {
+                    location.reload()
+                }
+            },
+            error: function (error) {
+                console.error("❌ Error:", error);
+            },
+        });
+    })
 
-        </script>
-    @endif
-@endsection
+</script>

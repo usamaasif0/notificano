@@ -1,7 +1,6 @@
 <style>
     .notification-count {
         display: inline-block;
-        top: 0.563rem !important;
         position: absolute !important;
         left: 1.375rem !important;
     }
@@ -213,7 +212,6 @@
                         }
                         filterNotificationsByTab(filter)
 
-                        console.log("✅ Notification marked as read:", data);
                     }
                 },
                 error: function (error) {

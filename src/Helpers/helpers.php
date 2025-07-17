@@ -23,7 +23,7 @@ if (!function_exists('setNotification')) {
                 'from_user' => $from_user,
                 'to_user' => $to_user,
                 'title' => $data['title'] ?? null,
-                'url' => null,
+                'url' => $data['url'] ?? null,
                 'read_at' => null,
             ]);
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.0.3] - 2024-07-09
+
+### Added
+- Added new helper function in `helpers.php`
+- Improved bell notification styles (`bell-notification.blade.php`)
+- Updated notification index view (`index.blade.php`)
+
 ## [v1.0.2] - 2024-07-09
 
 ### Fixes
